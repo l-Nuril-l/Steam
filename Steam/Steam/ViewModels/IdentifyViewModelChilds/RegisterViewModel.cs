@@ -118,7 +118,23 @@ namespace Steam.ViewModels
                             Error = "Change Name";
                     }
                 }
-                catch { a = false; MessageBox.Show("Wait xD"); }
+                catch {
+                    System.Drawing.Image ImageFromFile = System.Drawing.Image.FromFile(Environment.CurrentDirectory + "\\Images\\default-user-image.png");
+                    Bitmap bmp = new Bitmap(ImageFromFile);
+
+                    ImageConverter converter = new ImageConverter();
+                    byte[] ImageInArray = (byte[])converter.ConvertTo(bmp, typeof(byte[]));
+                    accountService.CreateOrUpdate(new AccountDTO()
+                    {
+                        Email = Mail,
+                        Login = Name,
+                        ProfileName = Name,
+                        PassHash = password,
+                        Avatar = ImageInArray
+                    });
+                    a = true;
+                    MessageBox.Show("Wait xD"); 
+                }
             }).ContinueWith((x)=> {
                 if (Name != "" && Mail != "" && (obj as PasswordBox).Password != ""&&a==true)
                     Application.Current.Dispatcher.Invoke((Action)delegate {

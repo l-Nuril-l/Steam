@@ -24,9 +24,9 @@ namespace Steam.DAL.Repositories
                                                   .Include(c => c.Messages)
                                                   .Include(c => c.Chats).ToList()[0];
             }
-            catch 
+            catch(Exception ex)
             {
-              //  MessageBox.Show("ReadAll AccountRep");
+                //MessageBox.Show(ex.Message);
             }
         }
     }

@@ -42,21 +42,33 @@ namespace Steam.Infrastructure
             for (int i = 0; i < names.Count; i++) 
             {
                 if (games.Count <= i)
+                {
+                    Game game = GetGameById(GetGameId(names[i]));
+                    if (game != null)
                     {
-                        Game game = GetGameById(GetGameId(names[i]));
                         sc.Game.Add(game);
                         sc.SaveChanges();
                     }
+                }
             }
             return games;
         }
         public static int GetGameId(string name)
         {            
             JArray array = (JArray)obj["apps"];
-            return Convert.ToInt32(array.Where(x => x["name"].ToString() == name).ToList()[0]["appid"]);
+            try
+            {
+                return Convert.ToInt32(array.Where(x => x["name"].ToString() == name).ToList()[0]["appid"]);
+            }
+            catch
+            {
+                return 0;
+            }
         }
         public static Game GetGameById(int id)
         {
+            if (id == 0)
+                return null;
             JObject data = JsonConvert.DeserializeObject<JObject>(webClient.DownloadString(baseUrl + id));
             if ((bool)data[id.ToString()]["success"])
             {
