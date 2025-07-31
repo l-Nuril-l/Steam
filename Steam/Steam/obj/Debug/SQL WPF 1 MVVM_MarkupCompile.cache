@@ -1,20 +1,20 @@
-SQL WPF 1 MVVM
+﻿SQL WPF 1 MVVM
 
 
 winexe
 C#
 .cs
-C:\Users\Nuril\Desktop\DEV\Steam\Steam\Steam\obj\Debug\
+C:\Users\chuev\Steam\Steam\Steam\Steam\obj\Debug\
 Steam
 none
 false
 DEBUG;TRACE
-C:\Users\Nuril\Desktop\DEV\Steam\Steam\Steam\App.xaml
-161621789015
+C:\Users\chuev\Steam\Steam\Steam\Steam\App.xaml
+161771228174
 
-43-579069122
-142-849907490
+42221536324
+139976343670
 Styles\MouseEnterStyle.xaml;Views\ChatView.xaml;Views\FriendsView.xaml;Views\IdentifyViewChilds\LoginView.xaml;Views\IdentifyViewChilds\RegisterView.xaml;Views\IdentifyView.xaml;Views\MainView.xaml;Views\MainViewClilds\EditUserView.xaml;Views\MainViewClilds\LibraryView.xaml;Views\MainViewClilds\ProfileView.xaml;Views\MainViewClilds\ShopView.xaml;Views\MainViewClilds\ShopViewChilds\BasketView.xaml;Views\MainViewClilds\ShopViewChilds\CatalogView.xaml;Views\MainViewClilds\ShopViewChilds\GameView.xaml;Views\MainViewClilds\ShopViewChilds\SearchView.xaml;Views\MainViewClilds\ShopViewChilds\WishlistView.xaml;
 
-True
+False
 

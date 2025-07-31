@@ -1,4 +1,4 @@
-﻿using CsQuery;
+using CsQuery;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RestSharp;
@@ -37,11 +37,13 @@ namespace Steam.Infrastructure
         public static List<Game> GetAndSaveGamesByList(List<string> names)
         {
             CheckData();
-            obj = JsonConvert.DeserializeObject<JObject>(File.ReadAllText(fileName)); 
+            obj = JsonConvert.DeserializeObject<JObject>(File.ReadAllText(fileName));
             List<Game> games = sc.Game.ToList();
-            for (int i = 0; i < names.Count; i++) 
+            for (int i = 0; i < names.Count; i++)
             {
                 if (games.Count <= i)
+                {
+                    try //hardcoded fix if steam game deleted or renamed
                 {
                     Game game = GetGameById(GetGameId(names[i]));
                     if (game != null)
@@ -50,11 +52,13 @@ namespace Steam.Infrastructure
                         sc.SaveChanges();
                     }
                 }
+                    catch (Exception e) { }
+                }
             }
             return games;
         }
         public static int GetGameId(string name)
-        {            
+        {
             JArray array = (JArray)obj["apps"];
             try
             {
@@ -97,7 +101,7 @@ namespace Steam.Infrastructure
                         game.Genres.Add(new Genre() { GenreName = obj["description"].ToString() });
                 }
                 List<Developer> developers = sc.Developers.ToList();
-                if(data["developers"] != null)
+                if (data["developers"] != null)
                     foreach (JValue obj in data["developers"])
                     {
                         if (developers.Where(x => x.DeveloperName == obj.ToString()).Count() > 0)
